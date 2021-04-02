@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mustard"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/almostGrey"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/other_user_profile_askForHelp_Tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity=""
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Ask for help"
+            android:textAlignment="center"
+            android:textColor="@color/brown" />
+
+        <TextView
+            android:id="@+id/other_user_profile_rate_Tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity=""
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Rate"
+            android:textAlignment="center"
+            android:textColor="@color/brown" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/top"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@drawable/upper_rect_prof"
+                android:backgroundTint="@color/almostGrey"
+                android:elevation="5dp">
+
+                <TextView
+                    android:id="@+id/other_user_profile_helpText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/other_user_profile_nameText"
+                    android:layout_alignStart="@+id/other_user_profile_nameText"
+                    android:layout_alignEnd="@+id/other_user_profile_nameText"
+                    android:layout_marginStart="-31dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-29dp"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/dubai_medium"
+                    android:text="Hosting a person for a limited time"
+                    android:textAlignment="center"
+                    android:textColor="@color/brown"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/other_user_profile_nameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/other_user_profile_profile_picture"
+                    android:layout_alignStart="@+id/other_user_profile_profile_picture"
+                    android:layout_alignEnd="@+id/other_user_profile_profile_picture"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/dubai_bold"
+                    android:text="@string/name"
+                    android:textAlignment="center"
+                    android:textColor="@color/brown"
+                    android:textSize="18sp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/other_user_profile_profile_picture"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerInParent="false"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/user_profile_photo_circle"
+                    app:civ_border_color="@color/brown" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/card"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="-10dp"
+                android:layout_marginEnd="36dp"
+                android:background="@drawable/user_profile_card_view_style"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:translationZ="10dp">
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/dubai_medium"
+                        android:text="Reputation"
+                        android:textAlignment="center"
+                        android:textColor="@color/almostGrey"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/other_profile_reputation_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:fontFamily="@font/dubai_medium"
+                        android:text="+6"
+                        android:textAlignment="center"
+                        android:textColor="@color/positiveGreen"
+                        android:textSize="15sp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/dubai_medium"
+                        android:text="Helped"
+                        android:textAlignment="center"
+                        android:textColor="@color/almostGrey"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/other_profile_helped_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:fontFamily="@font/dubai_medium"
+                        android:text="8"
+                        android:textAlignment="center"
+                        android:textColor="@color/positiveGreen"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/dubai_medium"
+                        android:text="Asked for help"
+                        android:textAlignment="center"
+                        android:textColor="@color/almostGrey"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/other_profile_asked_for_help_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:fontFamily="@font/dubai_medium"
+                        android:text="2"
+                        android:textAlignment="center"
+                        android:textColor="@color/positiveGreen"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/other_profile_frame_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/other_user_viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></androidx.viewpager.widget.ViewPager>
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

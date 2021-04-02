@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:background="@drawable/user_profile_background">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/user_profile_backToMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:src="@drawable/choose_gender_arrow_back"
+                android:onClick="backToMap"/>
+            <ImageView
+                android:id="@+id/user_profile_Reload"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_autorenew_black_24dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:onClick="loadImage"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_profile_updatePhoto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/signup_camera_icon"
+
+                app:civ_border_color="@color/brown"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="220dp"
+                android:onClick="changePhoto"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_profile_circleImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/user_profile_photo_circle"
+                android:translationZ="-10dp"/>
+        </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/user_profile_proName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/brown"
+                android:textAlignment="center"
+                android:fontFamily="@font/dubai_bold"
+                android:textSize="18sp"
+                android:elevation="5dp"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/user_profile_helpTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/brown"
+            android:fontFamily="@font/dubai_medium"
+            android:textSize="13sp"
+            android:textAlignment="center"
+            android:text="Hosting a person for a limited time"
+            android:elevation="5dp"/>
+        <TextView
+            android:id="@+id/user_profile_phoneNumber_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/brown"
+            android:fontFamily="@font/dubai_medium"
+            android:textSize="13sp"
+            android:textAlignment="center"
+            android:text="+593987461743"
+            android:elevation="5dp"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/user_profile_card_view_style"
+        >
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reputation"
+                android:textSize="15sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/dubai_medium"
+                android:textColor="@color/almostGrey"/>
+            <TextView
+                android:id="@+id/user_profile_reputation_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+6"
+                android:layout_marginTop="35dp"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:fontFamily="@font/dubai_medium"
+                android:textColor="@color/positiveGreen"/>
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Helped"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/dubai_medium"
+                android:textColor="@color/almostGrey"/>
+            <TextView
+                android:id="@+id/user_profile_helped_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8"
+                android:layout_marginTop="35dp"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:fontFamily="@font/dubai_medium"
+                android:textColor="@color/positiveGreen"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asked for help"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/dubai_medium"
+                android:textColor="@color/almostGrey"/>
+            <TextView
+                android:id="@+id/user_profile_asked_for_help_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:layout_marginTop="35dp"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:fontFamily="@font/dubai_medium"
+                android:textColor="@color/positiveGreen"/>
+
+        </RelativeLayout>
+
+
+
+
+
+
+    </LinearLayout>
+<FrameLayout
+    android:id="@+id/frameContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginTop="30dp" ></FrameLayout>
+
+
+
+
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapFragment">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <ImageView
+           android:id="@+id/map_fragment_goBack_imageView"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/choose_gender_arrow_back"
+           android:translationZ="10dp"
+           android:layout_marginTop="10dp"
+           android:layout_marginStart="10dp"/>
+       <com.google.android.gms.maps.MapView
+           android:id="@+id/map_fragment_mapView"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           />
+       <RelativeLayout
+           android:id="@+id/map_fragment_setLocation_button_RL"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:background="@drawable/verify_phone_verify_button_rect"
+           android:layout_alignParentBottom="true"
+           android:layout_marginBottom="20sp"
+           >
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/set_Location"
+               android:textColor="@color/brown"
+               android:layout_centerHorizontal="true"
+               android:fontFamily="@font/dubai_medium"
+               android:layout_marginTop="14dp" />
+
+       </RelativeLayout>
+
+   </RelativeLayout>
+
+</FrameLayout>

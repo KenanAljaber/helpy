@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="120dp"
+    android:layout_height="100dp"
+    android:paddingTop="5dp"
+    android:background="@drawable/custom_info_window">
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/custom_info_circleImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/user_profile_photo_circle"
+        />
+    <TextView
+        android:id="@+id/custom_info_name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/dubai_medium"
+        android:text="@string/name"
+        android:textColor="@color/almostGrey"
+        android:textSize="15sp" />
+
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/custom_info_help_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/dubai_light"
+        android:textAlignment="center"
+        android:text="help"
+        android:textColor="@color/almostGrey"
+        android:textSize="15sp" />
+
+
+
+
+</LinearLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+
+

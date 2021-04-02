@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "179727529036",
+    "firebase_url": "https://tactile-metrics-268520.firebaseio.com",
+    "project_id": "tactile-metrics-268520",
+    "storage_bucket": "tactile-metrics-268520.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179727529036:android:ab7edbc9ab8140f86530e9",
+        "android_client_info": {
+          "package_name": "com.peoplehandstech.helpy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179727529036-cdmf2snu56cj9trqin30ihdd3efacvgk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.peoplehandstech.helpy",
+            "certificate_hash": "fc51f905dd62de335567ee6b9a23a30c231ab34c"
+          }
+        },
+        {
+          "client_id": "179727529036-dblvkcudavens24opagudecf4bcocd8r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF90NUaamkGuaINWf5TbtiaEJM1BYvYkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "179727529036-dblvkcudavens24opagudecf4bcocd8r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

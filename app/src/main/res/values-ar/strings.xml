@@ -1,0 +1,98 @@
+<resources>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="log_in">Log In</string>
+    <string name="log_out">Log out</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="location">Location</string>
+    <string name="next">next</string>
+    <string name="set_Location">set location</string>
+    <string name="successfully_log_in">You are in</string>
+    <string name="failed_to_login_please_check_mail_and_password">Failed to Log In, please check E-mail and Password</string>
+    <string name="please_choose_a_gender">Please choose a gender</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="failed_to_change_password_wrong_old_password">Failed to change the password, wrong old password</string>
+    <string name="something_wrong_happened">something wrong happened</string>
+    <string name="please_wait">please wait...</string>
+    <string name="plase_select_location_and_press_setLocation_button">please mark your location and press the set location button</string>
+    <string name="please_edit_your_info_and_press_save">Please edit your information and press save</string>
+    <string name="save">save</string>
+    <string name="do_you_want_to_exit">Do you want to exit?</string>
+    <string name="old_password">Current password</string>
+    <string name="new_password">new password</string>
+    <string name="old_mail">Current E-mail</string>
+    <string name="new_mail">new E-mail</string>
+    <string name="wrong_informaition">Wrong information</string>
+    <string name="mail_already_exists">E-mail already exists</string>
+    <string name="old_phonenumber">Current phone Number</string>
+    <string name="new_phoneNumber">New phone Number</string>
+    <string name="verify">Verify</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="invalid_phone_number">Invalid phone number</string>
+    <string name="this_is_your_current_number">This is your current number</string>
+    <string name="code">Code</string>
+    <string name="sendCode">Send Code</string>
+    <string name="codeHasBeenSent">Code has been sent</string>
+    <string name="tell_me_how_can_i_help_you">Tell me how can I help you</string>
+    <string name="write_a_message">Write a message ….</string>
+    <string name="send_request">Send Request</string>
+    <string name="about_me">About me</string>
+    <string name="a_few_words_about_user">Few words about me....</string>
+    <string name="you_have_already_sent_a_request_to">you have already sent a request to</string>
+    <string name="back">Back</string>
+    <string name="please_select_help">Please select a way to help</string>
+    <string name="please_enter_full_name">Please enter full name</string>
+    <string name="please_fill_all_info">Please fill all information</string>
+    <string name="please_turn_gps_on">Sorry, turn on GPS </string>
+    <string name="please_set_location">Please select location</string>
+    <string name="please_enter_a_valid_mail">Please enter a valid E-mail</string>
+    <string name="password_should_contain_6_characters">Password must contain at least 6 characters</string>
+    <string name="please_select_aPhoto">Please pick a photo</string>
+    <string name="changes_has_been_saved">Changes has been saved</string>
+    <string name="tell_us_how_would_you_help">Tell us how would you help.</string>
+    <string name="new_request">New Request</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="accept">accept</string>
+    <string name="accepted">Accepted</string>
+    <string name="your_location">Your location</string>
+    <string name="your_gps_is_not_working">GPS is not working,turn GPS on to continue</string>
+    <string name="another_way_to_help">Another way to help.</string>
+
+    <string name="general_settings">General settings</string>
+    <string name="edit_name_the_way_you_can_help">edit name, the way you can help</string>
+
+    <string name="security">Security</string>
+    <string name="edit_password_phoneNumber_email">edit password, phone number, E-mail</string>
+
+
+    <string name="edit_your_location_on_map">edit your location on map</string>
+
+
+    <string name="select_a_way_toHelp">Choose a way to help</string>
+    <string name="couple_days_ofHosting">Hosting a person for a limited time</string>
+    <string name="translating">Assistance in translation</string>
+    <string name="official_docs_help">Assistance in paper work</string>
+    <string name="finding_aJob">Assistance in finding job</string>
+    <string name="financial_help_orFood">Financial aid </string>
+    <string name="another_help">Other...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="one">1</string>
+    <string name="please_tell">please tell</string>
+    <string name="how_to_help">how to help you</string>
+    <string name="request_has_been_sent">Request has been sent to</string>
+    <string name="request_accepted">Request Accepted</string>
+    <string name="has_accepted_your_request_you_can_contact_him_directly_via_whatsapp">has accepted your request ,you can contact directly via Whatsapp</string>
+    <string name="request_denied">Request denied</string>
+    <string name="your_phone_number_will_be_send_to">your phone number will be sent to</string>
+    <string name="so_you_can_get_in_touch">, so you can get in touch.</string>
+    <string name="note_you_can_only_rate_a_person_if_he_accepted_your_request">Note: you can only rate a person if he accepted your request</string>
+    <string name="verification_code_will_be_sent_to_your_phone_number_please_enter_the_code_and_press_verify">verification code will be sent to your phone number,please enter the code and press verify</string>
+    <string name="if_you_did_not_get_the_code_press_on_this_text_to_go_back_and_check_your_phone_number">if you did not get the code , press on this text to go back and check your phone number</string>
+    <string name="phone_number_with_country_code">Phone number with country code</string>
+
+</resources>

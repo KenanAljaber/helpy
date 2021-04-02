@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".SecuritySettingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/security_fragment_emailChange_LLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:id="@+id/settings_fragment_generalSettingsRLayout"
+                    android:layout_width="90dp"
+                    android:layout_height="85dp"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/security_fragment_mail_icon"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="28dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_centerVertical="true"
+                        android:gravity="start">
+                        <TextView
+                            android:id="@+id/settings_fragment_generalSettingsTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mail"
+                            android:textColor="@color/brown"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/dubai_medium"
+                            android:textSize="16sp"
+                            android:layout_marginTop="18dp"
+
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginEnd="30dp"
+                android:layout_height="1dp"
+                android:background="@color/brown"
+                android:alpha="0.75" />
+
+
+
+            <LinearLayout
+                android:id="@+id/security_fragment_passwordChange_LLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="90dp"
+                    android:layout_height="85dp"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/security_fragment_password_icon"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="28dp"/>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    >
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_centerVertical="true"
+                        android:gravity="start">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/password"
+                            android:textColor="@color/brown"
+                            android:fontFamily="@font/dubai_medium"
+                            android:textSize="16sp"
+                            android:layout_marginTop="18dp"
+                            />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginEnd="30dp"
+                android:layout_height="1dp"
+                android:alpha="0.75"
+                android:background="@color/brown"/>
+
+
+
+            <LinearLayout
+                android:id="@+id/security_fragment_phoneChange_LLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="90dp"
+                    android:layout_height="85dp"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/security_fragment_phone_icon"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="28dp"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical"
+                        android:gravity="start">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/phone_number"
+                            android:textColor="@color/brown"
+                            android:fontFamily="@font/dubai_medium"
+                            android:textSize="16sp"
+                            android:layout_marginTop="18dp"
+                            />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginEnd="30dp"
+                android:layout_height="1dp"
+                android:alpha="0.75"
+                android:background="@color/brown"/>
+            <RelativeLayout
+                android:id="@+id/security_fragment_backButton_RLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/user_profile_log_out_button_rect"
+                android:layout_marginTop="25dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back"
+                    android:layout_centerInParent="true"
+                    android:textSize="25sp"
+                    android:textColor="@color/brown"
+                    android:fontFamily="@font/dubai_medium"
+                    />
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
