@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.peoplehandstech.helpy.activities.MainActivity;
+
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -21,7 +23,7 @@ public class SplashScreen extends AppCompatActivity {
        new Handler().postDelayed(new Runnable() {
            @Override
            public void run() {
-               Intent homeIntetn=new Intent(SplashScreen.this,MainActivity.class);
+               Intent homeIntetn=new Intent(SplashScreen.this, MainActivity.class);
                startActivity(homeIntetn);
                finish();
            }

@@ -8,11 +8,11 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
- class CustomSpinner{
+ public class CustomSpinner{
 
     private static ArrayList<String> options;
 
-     static  void fillOptions (ArrayAdapter<String> spnAdapter,Spinner spn,Context context)
+    public static  void fillOptions (ArrayAdapter<String> spnAdapter,Spinner spn,Context context)
     {
         options=new ArrayList<>();
         options.add(context.getResources().getString(R.string.select_a_way_toHelp));

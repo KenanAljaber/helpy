@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "179727529036-lckgvbc7hdeg13lidv9hkgvp236p2jgr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.peoplehandstech.helpy",
+            "certificate_hash": "f52a2d3cabced92d713d7f13f41c8ff67f48f49d"
+          }
+        },
+        {
+          "client_id": "179727529036-q7v3pgmj5phiptosht2s4bqeckmfhb7m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.peoplehandstech.helpy",
+            "certificate_hash": "3ca1ebb933251e7267da49989214b962521c914f"
+          }
+        },
+        {
           "client_id": "179727529036-dblvkcudavens24opagudecf4bcocd8r.apps.googleusercontent.com",
           "client_type": 3
         }

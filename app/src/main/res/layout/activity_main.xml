@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mainpage_background"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
+
+    <TextView
+        android:id="@+id/forgetPasswordTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="11dp"
+        android:fontFamily="@font/dubai_medium"
+        android:text="Forget password?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainPage_signUp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -118,12 +131,12 @@
         android:id="@+id/mainPage_signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/mainpage_signup_text"
+        android:onClick="signUp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/signIn"
-        app:layout_constraintStart_toStartOf="@+id/signIn"
-        android:onClick="signUp"/>
+        app:layout_constraintStart_toStartOf="@+id/signIn" />
 
     <ProgressBar
         android:id="@+id/progressbar"

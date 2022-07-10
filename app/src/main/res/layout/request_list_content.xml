@@ -8,14 +8,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/almostGrey"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/almostGrey"
         android:orientation="horizontal"
         android:layout_marginBottom="5dp">
         <LinearLayout
@@ -40,67 +40,75 @@
                 android:fontFamily="@font/dubai_medium"
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/request_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/new_request"
-                android:textSize="18sp"
+                android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/dubai_medium"
+                android:text="@string/new_request"
                 android:textColor="@color/text_brown"
-                android:layout_gravity="center_horizontal"/>
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/request_list_content_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/dubai_light"
+                android:text="this is a new request for you."
                 android:textAlignment="center"
                 android:textColor="@color/text_brown"
-                android:textSize="15sp"
-                android:fontFamily="@font/dubai_light"
-                android:text="this is a new request for you."/>
+                android:textSize="15sp" />
+
             <LinearLayout
                 android:id="@+id/request_list_LL_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
                 android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                >
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:id="@+id/request_list_content_yesButton_RL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/request_list_content_yes_rect"
-                    android:layout_marginEnd="40dp">
+                    android:layout_marginEnd="40dp"
+                    android:background="@drawable/request_list_content_yes_rect">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/yes"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="3dp"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/dubai_medium"/>
+                        android:fontFamily="@font/dubai_medium"
+                        android:text="@string/yes"
+                        android:textColor="@color/white" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/request_list_content_noButton_RL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/request_list_content_no_rect">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/no"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="3dp"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/dubai_medium"/>
+                        android:fontFamily="@font/dubai_medium"
+                        android:text="@string/no"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -108,8 +116,18 @@
 
         </LinearLayout>
     </LinearLayout>
+
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/darker_gray">
+
+    </RelativeLayout>
 
 
 </LinearLayout>

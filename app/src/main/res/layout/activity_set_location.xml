@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SetLocationActivity"
+    tools:context=".activities.SetLocationActivity"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="580dp"
-        android:layout_weight="1"
 
-        >
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:map="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
@@ -19,65 +25,69 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".SetLocationActivity"
-            />
+            tools:context=".activities.SetLocationActivity" />
+
         <ProgressBar
             android:id="@+id/set_location_progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/set_location_wait_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="325dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="325dp"
+            android:fontFamily="@font/dubai_bold"
             android:text="@string/please_wait"
             android:textColor="@color/mustard"
-            android:fontFamily="@font/dubai_bold"
             android:textSize="18sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </RelativeLayout>
 
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
         android:background="@color/mustard"
+        android:gravity="center"
         android:orientation="vertical"
-        android:layout_weight="10">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/set_location_setLocation_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/signup_location_button_rect"
-            android:onClick="goToSignUp"
-            android:textColor="@color/brown"
             android:layout_marginTop="5dp"
+            android:background="@drawable/signup_location_button_rect"
             android:fontFamily="@font/dubai_light"
-            android:text="@string/set_Location"
+            android:onClick="goToSignUp"
             android:padding="16dp"
-            />
+            android:text="@string/set_Location"
+            android:textColor="@color/brown" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textAlignment="center"
-            android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-           android:textColor="@color/brown"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/dubai_bold"
-            android:text="@string/plase_select_location_and_press_setLocation_button" />
+            android:text="@string/plase_select_location_and_press_setLocation_button"
+            android:textAlignment="center"
+            android:textColor="@color/brown" />
 
 
     </LinearLayout>
 
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

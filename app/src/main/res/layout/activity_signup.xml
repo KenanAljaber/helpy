@@ -97,21 +97,22 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
                android:layout_marginBottom="5dp" />
+
             <EditText
                 android:id="@+id/signUp_PhoneNumber_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="5dp"
                 android:background="@null"
-                android:textColorHint="#BF87643E"
-                android:hint="@string/phone_number"
                 android:fontFamily="@font/dubai_light"
-                android:textColor="@color/brown"
+                android:hint="Phone Number +915XXXX"
+                android:inputType="phone"
                 android:textAlignment="center"
-                android:inputType="phone"/>
+                android:textColor="@color/brown"
+                android:textColorHint="#BF87643E" />
     </LinearLayout>
         <LinearLayout
 
@@ -240,24 +241,26 @@
 
 
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/signUp_next_rLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/signup_next_button_rect"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:onClick="next"
-        >
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/signup_next_button_rect"
+        android:onClick="next">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next"
-            android:fontFamily="@font/dubai_bold"
-            android:textColor="@color/brown"
-            android:textSize="18sp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/dubai_bold"
+            android:text="@string/next"
+            android:textColor="@color/brown"
+            android:textSize="18sp" />
     </RelativeLayout>
 
 </LinearLayout>

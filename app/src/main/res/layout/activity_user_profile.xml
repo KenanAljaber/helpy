@@ -1,203 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="@drawable/user_profile_background">
+   android:background="@color/almostGrey">
 
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
+        android:background="@color/mustard"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        >
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/user_profile_backToMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15sp"
+                android:layout_alignStart="@+id/user_profile_circleImage"
+                android:layout_marginStart="15dp"
+                android:onClick="backToMap"
                 android:src="@drawable/choose_gender_arrow_back"
-                android:onClick="backToMap"/>
+                android:visibility="gone" />
+
             <ImageView
                 android:id="@+id/user_profile_Reload"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_autorenew_black_24dp"
                 android:layout_centerInParent="true"
-                android:visibility="gone"
-                android:onClick="loadImage"/>
+                android:onClick="loadImage"
+                android:src="@drawable/ic_autorenew_black_24dp"
+                android:visibility="gone" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_profile_updatePhoto"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/signup_camera_icon"
 
-                app:civ_border_color="@color/brown"
-                android:layout_marginTop="100dp"
-                android:layout_marginStart="220dp"
-                android:onClick="changePhoto"/>
+                android:layout_alignEnd="@+id/user_profile_circleImage"
+                android:layout_alignBottom="@+id/user_profile_circleImage"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/signup_camera_icon"
+                android:onClick="changePhoto"
+                app:civ_border_color="@color/brown" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_profile_circleImage"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_centerInParent="true"
                 android:background="@drawable/user_profile_photo_circle"
-                android:translationZ="-10dp"/>
+                android:translationZ="-10dp" />
         </RelativeLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/logOut_button"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/user_profile_phoneNumber_TextView"
+                app:srcCompat="@drawable/ic_logout" />
+
+            <TextView
+                android:id="@+id/user_profile_phoneNumber_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:elevation="5dp"
+                android:fontFamily="@font/dubai_medium"
+                android:text="+593987461743"
+                android:textAlignment="center"
+                android:textColor="@color/brown"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_profile_helpTextView" />
+
+            <TextView
+                android:id="@+id/user_profile_helpTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:elevation="5dp"
+                android:fontFamily="@font/dubai_medium"
+                android:text="Hosting a person for a limited time"
+                android:textAlignment="center"
+                android:textColor="@color/brown"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_profile_proName" />
 
             <TextView
                 android:id="@+id/user_profile_proName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/brown"
-                android:textAlignment="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:elevation="5dp"
                 android:fontFamily="@font/dubai_bold"
+                android:text="@string/name"
+                android:textAlignment="center"
+                android:textColor="@color/brown"
                 android:textSize="18sp"
-                android:elevation="5dp"/>
-
-        <TextView
-            android:layout_marginTop="5dp"
-            android:id="@+id/user_profile_helpTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/brown"
-            android:fontFamily="@font/dubai_medium"
-            android:textSize="13sp"
-            android:textAlignment="center"
-            android:text="Hosting a person for a limited time"
-            android:elevation="5dp"/>
-        <TextView
-            android:id="@+id/user_profile_phoneNumber_TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/brown"
-            android:fontFamily="@font/dubai_medium"
-            android:textSize="13sp"
-            android:textAlignment="center"
-            android:text="+593987461743"
-            android:elevation="5dp"/>
-
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
         android:background="@drawable/user_profile_card_view_style"
-        >
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
         <RelativeLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Reputation"
-                android:textSize="15sp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:textAlignment="center"
                 android:fontFamily="@font/dubai_medium"
-                android:textColor="@color/almostGrey"/>
+                android:text="Reputation"
+                android:textAlignment="center"
+                android:textColor="@color/almostGrey"
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/user_profile_reputation_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+6"
                 android:layout_marginTop="35dp"
-                android:textSize="15sp"
-                android:textAlignment="center"
                 android:fontFamily="@font/dubai_medium"
-                android:textColor="@color/positiveGreen"/>
-
+                android:text="+6"
+                android:textAlignment="center"
+                android:textColor="@color/positiveGreen"
+                android:textSize="15sp" />
 
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Helped"
-                android:textSize="15sp"
                 android:layout_marginTop="15dp"
-                android:textAlignment="center"
                 android:fontFamily="@font/dubai_medium"
-                android:textColor="@color/almostGrey"/>
+                android:text="Helped"
+                android:textAlignment="center"
+                android:textColor="@color/almostGrey"
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/user_profile_helped_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="8"
                 android:layout_marginTop="35dp"
-                android:textSize="15sp"
-                android:textAlignment="center"
                 android:fontFamily="@font/dubai_medium"
-                android:textColor="@color/positiveGreen"/>
+                android:text="8"
+                android:textAlignment="center"
+                android:textColor="@color/positiveGreen"
+                android:textSize="15sp" />
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1">
+
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Asked for help"
-                android:textSize="15sp"
                 android:layout_marginTop="15dp"
-                android:textAlignment="center"
                 android:fontFamily="@font/dubai_medium"
-                android:textColor="@color/almostGrey"/>
+                android:text="Asked for help"
+                android:textAlignment="center"
+                android:textColor="@color/almostGrey"
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/user_profile_asked_for_help_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2"
                 android:layout_marginTop="35dp"
-                android:textSize="15sp"
-                android:textAlignment="center"
                 android:fontFamily="@font/dubai_medium"
-                android:textColor="@color/positiveGreen"/>
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/positiveGreen"
+                android:textSize="15sp" />
 
         </RelativeLayout>
 
 
-
-
-
-
     </LinearLayout>
-<FrameLayout
-    android:id="@+id/frameContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-    android:layout_marginTop="30dp" ></FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"></FrameLayout>
 
 
 
@@ -207,4 +245,4 @@
 
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

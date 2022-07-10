@@ -88,10 +88,10 @@
     <string name="how_to_help">how to help you</string>
     <string name="request_has_been_sent">Request has been sent to</string>
     <string name="request_accepted">Request Accepted</string>
-    <string name="has_accepted_your_request_you_can_contact_him_directly_via_whatsapp">has accepted your request ,you can contact directly via Whatsapp</string>
+    <string name="has_accepted_your_request_you_can_contact_him_directly_via_whatsapp">has accepted your request ,you can find him/her in your friend list.</string>
     <string name="request_denied">Request denied</string>
-    <string name="your_phone_number_will_be_send_to">your phone number will be sent to</string>
-    <string name="so_you_can_get_in_touch">, so you can get in touch.</string>
+    <string name="you_are_a_friend_now_with">you are a friend now with </string>
+    <string name="so_you_can_get_in_touch">, you can find him/her in your friend list.</string>
     <string name="note_you_can_only_rate_a_person_if_he_accepted_your_request">Note: you can only rate a person if he accepted your request</string>
     <string name="verification_code_will_be_sent_to_your_phone_number_please_enter_the_code_and_press_verify">verification code will be sent to your phone number,please enter the code and press verify</string>
     <string name="if_you_did_not_get_the_code_press_on_this_text_to_go_back_and_check_your_phone_number">if you did not get the code , press on this text to go back and check your phone number</string>

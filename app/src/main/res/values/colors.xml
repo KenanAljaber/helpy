@@ -24,6 +24,6 @@
     <color name="text_brown"> #A68C70</color>
     <color name="errorColor">#FF9494</color>
     <color name="red">#FF1313</color>
-
+    <color name="dark_grey_message">#605F60</color>
 
 </resources>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_requests_list_holder"
-    tools:context=".NotificationsList">
+    tools:context=".activities.NotificationsListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"

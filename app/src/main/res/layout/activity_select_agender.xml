@@ -4,114 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectAGender"
+    tools:context=".activities.SelectAGenderActivity"
     android:orientation="vertical"
     android:background="@drawable/choose_gender_background_second_option"
      >
-    <RelativeLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
+        android:layout_height="match_parent">
+
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
+            android:id="@+id/select_gender_maleUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/choose_gender_circle_gender"
 
+            android:gravity="center"
+            android:onClick="selectGender"
+            app:layout_constraintBottom_toTopOf="@+id/select_gender_next_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/choose_gender_male_icon" />
+        </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/select_gender_goBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/choose_gender_arrow_back"
-                   android:layout_marginBottom="10dp"
-                    android:onClick="goBack"
-                    />
+        <RelativeLayout
+            android:id="@+id/select_gender_femaleUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/choose_gender_circle_gender"
+            android:gravity="center"
 
+            android:onClick="selectGender"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/select_gender_topBar">
 
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/choose_gender_female_icon" />
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/select_gender_topBar"
+        <ImageView
+            android:id="@+id/select_gender_goBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="goBack"
+            android:src="@drawable/choose_gender_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/select_gender_topBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/choose_gender_rectangle"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/choose_gender_rectangle"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="100dp"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Choose a Gender"
-                    android:fontFamily="@font/dubai_light"
-                    android:textColor="@color/almostGrey"/>
-            </RelativeLayout>
+                android:fontFamily="@font/dubai_light"
+                android:text="Choose a Gender"
+                android:textColor="@color/almostGrey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/select_gender_next_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/choose_gender_circle_arrow"
+            android:onClick="goToSignUp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/choose_gender_arrow_next" />
 
         </RelativeLayout>
 
-
         <LinearLayout
+            android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="150dp"
-            android:layout_centerHorizontal="true">
-
-            <RelativeLayout
-                android:id="@+id/select_gender_femaleUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:background="@drawable/choose_gender_circle_gender"
-                android:layout_marginTop="30dp"
-                android:onClick="selectGender"
-
-                >
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/choose_gender_female_icon"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/select_gender_maleUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:layout_marginTop="100dp"
-                android:background="@drawable/choose_gender_circle_gender"
-
-                android:onClick="selectGender"
-                >
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/choose_gender_male_icon"/>
-            </RelativeLayout>
-
-
+            tools:layout_editor_absoluteY="683dp">
 
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/select_gender_next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/choose_gender_circle_arrow"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="10dp"
-            android:onClick="goToSignUp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/choose_gender_arrow_next"
-                android:layout_centerInParent="true"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
 
 
     </RelativeLayout>

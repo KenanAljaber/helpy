@@ -2,178 +2,201 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/other_profile_background">
+    tools:context=".activities.OtherUserProfileActivity"
+    android:background="@color/mustard">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
+
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/almostGrey"
 
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            >
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/other_user_profile_profile_picture"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_centerInParent="true"
-                    app:civ_border_color="@color/brown"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="8dp"
                     android:background="@drawable/user_profile_photo_circle"
-                    />
+                    app:civ_border_color="@color/brown" />
             </RelativeLayout>
 
-
-            <TextView
-                android:id="@+id/other_user_profile_nameText"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/brown"
-                android:textAlignment="center"
-                android:fontFamily="@font/dubai_bold"
-                android:textSize="18sp"
-                android:elevation="5dp"/>
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_marginTop="5dp"
-                android:id="@+id/other_user_profile_helpText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/brown"
-                android:fontFamily="@font/dubai_medium"
-                android:textSize="13sp"
-                android:textAlignment="center"
-                android:text="Hosting a person for a limited time"
-                android:elevation="5dp"/>
+                <TextView
+                    android:id="@+id/other_user_profile_helpText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/dubai_medium"
+                    android:text="Hosting a person for a limited time"
+                    android:textAlignment="center"
+                    android:textColor="@color/brown"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/other_user_profile_nameText" />
 
-
+                <TextView
+                    android:id="@+id/other_user_profile_nameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/dubai_bold"
+                    android:text="@string/name"
+                    android:textAlignment="center"
+                    android:textColor="@color/brown"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="320dp"
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/user_profile_card_view_style"
-            >
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
             <RelativeLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Reputation"
-                    android:textSize="15sp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                   android:textAlignment="center"
                     android:fontFamily="@font/dubai_medium"
-                    android:textColor="@color/almostGrey"/>
+                    android:text="Reputation"
+                    android:textAlignment="center"
+                    android:textColor="@color/almostGrey"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/other_profile_reputation_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+6"
                     android:layout_marginTop="35dp"
-                    android:textSize="15sp"
-                    android:textAlignment="center"
                     android:fontFamily="@font/dubai_medium"
-                    android:textColor="@color/positiveGreen"/>
-
+                    android:text="+6"
+                    android:textAlignment="center"
+                    android:textColor="@color/positiveGreen"
+                    android:textSize="15sp" />
 
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Helped"
-                    android:textSize="15sp"
                     android:layout_marginTop="15dp"
-                    android:textAlignment="center"
                     android:fontFamily="@font/dubai_medium"
-                    android:textColor="@color/almostGrey"/>
+                    android:text="Helped"
+                    android:textAlignment="center"
+                    android:textColor="@color/almostGrey"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/other_profile_helped_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="8"
                     android:layout_marginTop="35dp"
-                    android:textSize="15sp"
-                    android:textAlignment="center"
                     android:fontFamily="@font/dubai_medium"
-                    android:textColor="@color/positiveGreen"/>
+                    android:text="8"
+                    android:textAlignment="center"
+                    android:textColor="@color/positiveGreen"
+                    android:textSize="15sp" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1">
+
                 <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Asked for help"
-                    android:textSize="15sp"
                     android:layout_marginTop="15dp"
-                    android:textAlignment="center"
                     android:fontFamily="@font/dubai_medium"
-                    android:textColor="@color/almostGrey"/>
+                    android:text="Asked for help"
+                    android:textAlignment="center"
+                    android:textColor="@color/almostGrey"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/other_profile_asked_for_help_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2"
                     android:layout_marginTop="35dp"
-                    android:textSize="15sp"
-                    android:textAlignment="center"
                     android:fontFamily="@font/dubai_medium"
-                    android:textColor="@color/positiveGreen"/>
+                    android:text="2"
+                    android:textAlignment="center"
+                    android:textColor="@color/positiveGreen"
+                    android:textSize="15sp" />
 
             </RelativeLayout>
 
 
         </LinearLayout>
 
-            <FrameLayout
-                android:id="@+id/other_profile_frame_container"
+        <FrameLayout
+            android:id="@+id/other_profile_frame_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/other_user_viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/other_user_viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </androidx.viewpager.widget.ViewPager>
-            </FrameLayout>
+                android:layout_height="match_parent"></androidx.viewpager.widget.ViewPager>
+        </FrameLayout>
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
