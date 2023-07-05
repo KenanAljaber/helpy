@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.peoplehandstech.helpy.UserDataChangesCallback;
 import com.peoplehandstech.helpy.utilites.DATABASE;
 import com.peoplehandstech.helpy.R;
 import com.peoplehandstech.helpy.utilites.UserHandler;
@@ -34,7 +35,7 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MailChangeFragment extends Fragment implements View.OnClickListener {
+public class MailChangeFragment extends Fragment implements View.OnClickListener, UserDataChangesCallback {
 
     private EditText oldMail,password,newMail;
     private RelativeLayout saveButtonR;
@@ -124,12 +125,8 @@ public class MailChangeFragment extends Fragment implements View.OnClickListener
                                 currUSer.seteMail(newMail.getText().toString());
 
 //                                DATABASE.updateUser(currUSer.getId(),currUSer);
-                                UserHandler.updateUserInfo("eMail", newMail.getText().toString(), currUSer);
-                                Toast.makeText(getContext(), getString(R.string.changes_has_been_saved), Toast.LENGTH_SHORT).show();
-                                oldMail.setText("");
-                                password.setText("");
-                                newMail.setText("");
-                                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                UserHandler.updateUserInfoByAttribute("eMail", newMail.getText().toString(), currUSer,MailChangeFragment.this);
+
                             }
                         });
                     } else {
@@ -156,5 +153,12 @@ public class MailChangeFragment extends Fragment implements View.OnClickListener
         }
 
 
-
+    @Override
+    public void onChangesCompleted() {
+        Toast.makeText(getContext(), getString(R.string.changes_has_been_saved), Toast.LENGTH_SHORT).show();
+        oldMail.setText("");
+        password.setText("");
+        newMail.setText("");
+        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
 }

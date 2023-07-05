@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class User implements Serializable {
 
+
+
     private String name;
     private String phoneNumber;
     private String eMail;
@@ -283,4 +285,10 @@ public class User implements Serializable {
         this.friendsList = friendsList;
     }
 
+    public void setHowToHelp(String howToHelp) {
+        this.howToHelp = howToHelp;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -7,7 +7,7 @@
     <color name="brightBlue">#bbe1fa</color>
     <color name="strongBlue">#3282b8</color>
     <color name="strongBlue2">#0f4c75</color>
-    <color name="almostBlack">#1b262c</color>
+    <color name="almostBlack">#333333</color>
     <color name="Black">#000</color>
     <color name="positiveGreen">#4EFF5A</color>
     <color name="selectedButton">#FF9292</color>

@@ -13,18 +13,17 @@ import java.util.Locale;
 
 public class Location implements Serializable {
 
-    private double latitude,longitude;
-    static String TAG="LOCATION_HELPY";
+    private double latitude, longitude;
+    static String TAG = "LOCATION_HELPY";
 
 
-    public Location ()
-    {
+    public Location() {
 
     }
-    public Location(double latitude, double longitude)
-    {
-        this.latitude=latitude;
-        this.longitude=longitude;
+
+    public Location(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public double getLatitude() {
@@ -43,33 +42,27 @@ public class Location implements Serializable {
         this.longitude = longitude;
     }
 
-    public static String getCityName(double longitude, double latitude, Context ctx) throws IOException,NullPointerException {
-        Geocoder gcd = new Geocoder(ctx, Locale.getDefault());
+    public static String getCityName(double longitude, double latitude, Context ctx) throws IOException, NullPointerException {
+        Geocoder gcd = new Geocoder(ctx, Locale.ENGLISH);  // Set Locale to English
         List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
         if (addresses.size() > 0) {
-
-            if(addresses.get(0).getCountryName()!=null){
-                Log.d(TAG,addresses.get(0).getCountryName().toString());
+            if (addresses.get(0).getCountryName() != null) {
+                Log.d(TAG, addresses.get(0).getCountryName());
                 return addresses.get(0).getCountryName();
             }
-            if(addresses.get(0).getLocality()!=null){
-                Log.d(TAG,addresses.get(0).getLocality().toString());
-
+            if (addresses.get(0).getLocality() != null) {
+                Log.d(TAG, addresses.get(0).getLocality());
                 return addresses.get(0).getLocality();
             }
-            if(addresses.get(0).getSubLocality()!=null){
-                Log.d(TAG,addresses.get(0).getSubLocality().toString());
+            if (addresses.get(0).getSubLocality() != null) {
+                Log.d(TAG, addresses.get(0).getSubLocality());
                 return addresses.get(0).getSubLocality();
             }
-
-
-        else {
-            Log.d(TAG,"empty location");
-            // do your stuff
-            Toast.makeText(ctx, "Error ",Toast.LENGTH_LONG).show();
-            return null;
-        }
+        } else {
+            Log.d(TAG, "empty location");
+            throw new RuntimeException("Please select a valid location");
         }
         return null;
     }
+
 }

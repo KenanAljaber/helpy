@@ -21,7 +21,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,6 +43,7 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class NotificationsListActivity extends AppCompatActivity implements MyAdapterListener {
     private  androidx.recyclerview.widget.RecyclerView recyclerView;
@@ -101,8 +101,7 @@ public class NotificationsListActivity extends AppCompatActivity implements MyAd
         //modify the accepted request and upload it to the data base
         request.setSeen(true);
         deleteRequestFromDatabase(request);
-        FirebaseDatabase.getInstance().getReference().child(currUser.getCity()).child(currUser.getId()).child(Request.TAG)
-                .child(Request.YOU_ACCEPTED+request.getRequestId()).setValue(request);
+        uploadRequestToUser(request, currUser, Request.YOU_ACCEPTED);
 
         // create a new notification to notify the notification user that its accepted
         Request acceptedRequest = new Request(currUser.getId(),
@@ -111,31 +110,51 @@ public class NotificationsListActivity extends AppCompatActivity implements MyAd
         // get the notification user by the notification id
         User notificationUser=DATABASE.getUser(request.getRequestId());
         // upload the accepted request notification to the user
-        FirebaseDatabase.getInstance().getReference().child(notificationUser.getCity()).child(notificationUser.getId()).child(Request.TAG)
-                .child(Request.ACCEPTED_REQUEST+currUser.getId()).setValue(acceptedRequest);
+        Objects.requireNonNull(notificationUser);
+        uploadRequestToUser(acceptedRequest,notificationUser,Request.ACCEPTED_REQUEST);
+       /* FirebaseDatabase.getInstance().getReference().child(notificationUser.getCity()).child(notificationUser.getId()).child(Request.TAG)
+                .child(Request.ACCEPTED_REQUEST+currUser.getId()).setValue(acceptedRequest);*/
+
+
         // and here we set the notification into the user array
-       RequestHandler.getUsersRequest().get(notificationUser.getId()).add(acceptedRequest);
-        ArrayList<Request> notificationsUserArray =RequestHandler.getUsersRequest().get(notificationUser.getId());
-        notificationUser.setPending(notificationsUserArray);
+
+        ArrayList<Request> notificationUserRequestsList=RequestHandler.getUsersRequest().get(notificationUser.getId());
+       Objects.requireNonNull(notificationUserRequestsList).add(acceptedRequest);
+        notificationUser.setPending(notificationUserRequestsList);
         int userHelped=currUser.getHelped()+1;
         currUser.setHelped(userHelped);
         addToFriendsList(request);
 
-        UserHandler.updateUserInfo("helped",userHelped,currUser);
-        UserHandler.refreshUserFriendsList(currUser);
-
-
+        UserHandler.updateUserInfoByAttribute("helped",currUser.getHelped(),currUser,()->{
+        UserHandler.refreshUserFriendsList(currUser,()->{
         //notify the owner of the notification that current user has accepted his request
-        NotificationFCM acceptedRequestNotification=new NotificationFCM(notificationUser.getName(),acceptedRequest.getMessage(),currUser.getName(),notificationUser.getToken());
+        sendNotificationToNotificationUser(acceptedRequest, notificationUser);
+        });
+        });
+
+
+
+
+    }
+
+    private void sendNotificationToNotificationUser(Request acceptedRequest, User notificationUser) {
+        NotificationFCM acceptedRequestNotification=new NotificationFCM(notificationUser.getName(),
+                acceptedRequest.getMessage(),currUser.getName(), notificationUser.getToken());
         try {
-            JSONObject notification=FirebaseNotificationHandler.createJSONObject(acceptedRequestNotification,currUser,notificationUser,"accepted your request!", MyNotifications.ACCEPT_REQUEST);
+            JSONObject notification=FirebaseNotificationHandler.createJSONObject(acceptedRequestNotification,
+                    currUser, notificationUser,"accepted your request!", MyNotifications.ACCEPT_REQUEST);
+
             FirebaseNotificationHandler.sendNotification(notification,getApplicationContext());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
     }
+
+    private void uploadRequestToUser(Request request, User user, String statue) {
+        FirebaseDatabase.getInstance().getReference().child(user.getCity()).child(user.getId()).child(Request.TAG)
+                .child(statue + request.getRequestId()).setValue(request);
+    }
+
     private void deleteRequestFromDatabase(Request request)
     {
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child(currUser.getCity())
@@ -165,18 +184,10 @@ public class NotificationsListActivity extends AppCompatActivity implements MyAd
                     if(PopupWindow.isReady()){
                         if(userAccepts)
                         {
+                            //update notifications list UI
                             userAccepts=false;
-                            System.out.println(TAG + " after YES");
-                            Request selectedRequest = myRequests.get(position);
-                            selectedRequest.setTitle(getString(R.string.accepted));
-                            selectedRequest.setMessage(getString(R.string.you_are_a_friend_now_with)+" "+selectedRequest.getName()+getString(R.string.so_you_can_get_in_touch));
-                            selectedRequest.setAccepted(true);
-                            selectedRequest.setSeen(true);
-                            myRequests.remove(position);
-                            myRequests.add(position,selectedRequest);
-                            mAdapter.notifyItemChanged(position);
-                            mAdapter.notifyItemRangeChanged(position, myRequests.size());
-                            mAdapter.notifyDataSetChanged();
+                            Request selectedRequest = updateAcceptedRequest(position);
+
                             acceptRequest(selectedRequest);
 
                             setUserNotificationsUpdated(true);
@@ -217,6 +228,27 @@ public class NotificationsListActivity extends AppCompatActivity implements MyAd
         }
 
     }
+
+    /**
+     *
+     * @param position
+     * @return
+     */
+    private Request updateAcceptedRequest(int position) {
+        System.out.println(TAG + " after YES");
+        Request selectedRequest = myRequests.get(position);
+        selectedRequest.setTitle(getString(R.string.accepted));
+        selectedRequest.setMessage(getString(R.string.you_are_a_friend_now_with)+" "+selectedRequest.getName()+getString(R.string.so_you_can_get_in_touch));
+        selectedRequest.setAccepted(true);
+        selectedRequest.setSeen(true);
+        myRequests.remove(position);
+        myRequests.add(position,selectedRequest);
+        mAdapter.notifyItemChanged(position);
+        mAdapter.notifyItemRangeChanged(position, myRequests.size());
+        mAdapter.notifyDataSetChanged();
+        return selectedRequest;
+    }
+
     @Override
     public void onBackPressed() {
 

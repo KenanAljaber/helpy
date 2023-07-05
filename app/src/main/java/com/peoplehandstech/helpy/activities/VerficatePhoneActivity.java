@@ -40,6 +40,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.peoplehandstech.helpy.OnEmailCheckListener;
+import com.peoplehandstech.helpy.UsersFetchingCallback;
 import com.peoplehandstech.helpy.utilites.DATABASE;
 import com.peoplehandstech.helpy.R;
 import com.peoplehandstech.helpy.models.User;
@@ -632,10 +633,10 @@ public class VerficatePhoneActivity extends AppCompatActivity implements OnEmail
                             .setValue(user);
 
                     //start downloading all users in the same user's country
-                    DATABASE.setUsers(user.getCity());
+                    DATABASE.setUsers(user.getCity(),usersCallback);
 
                     //if database is ready sign user in
-                    handler.postDelayed(signUserIn,150);
+//                    handler.postDelayed(signUserIn,150);
 
 
 
@@ -644,5 +645,36 @@ public class VerficatePhoneActivity extends AppCompatActivity implements OnEmail
         });
     }
 
+private UsersFetchingCallback usersCallback =new UsersFetchingCallback() {
+    @Override
+    public void onLocationReady(String country) {
 
+    }
+
+    @Override
+    public void onLocationNull() {
+
+    }
+
+    @Override
+    public void onLocationError() {
+
+    }
+
+    @Override
+    public void onUsersSet() {
+        if(DATABASE.isReadyToGo())
+        {
+            Toast.makeText(VerficatePhoneActivity.this,getString(R.string.registered_successfully),Toast.LENGTH_LONG).show();
+            Intent i=new Intent(VerficatePhoneActivity.this,GetHelpActivity.class);
+            i.putExtra("current user from phone verification",user);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //we update this flag to true so we can shut down the sigUp activity
+            verficated=true;
+            startActivity(i);
+            VerficatePhoneActivity.this.finish();
+
+        }
+    }
+};
 }

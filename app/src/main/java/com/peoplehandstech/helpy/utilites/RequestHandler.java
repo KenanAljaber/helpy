@@ -10,6 +10,7 @@ import com.peoplehandstech.helpy.models.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class RequestHandler {
 
@@ -61,14 +62,6 @@ public class RequestHandler {
 
     public static boolean checkUserToRate (User currUser, String otherUserID , Context context)
     {
-
-//            if(currUser.searchFriends(otherUserID) && !RequestHandler.didIRateThisUser()){
-//                return true;
-//            }else
-//                return false;
-
-
-
         boolean requestAccepted=checkUserRequest(currUser,otherUserID,context);
         Log.d(TAG,"checkUserToRate method >>> requestAccepted "+requestAccepted);
         if(requestAccepted)
@@ -83,14 +76,19 @@ public class RequestHandler {
                   //  Toast.makeText(context,"current user rating size is  0",Toast.LENGTH_SHORT).show();
                     return true;
                 }
-                for(Rating rating:currUserRating)
+               Optional<Rating> op=currUserRating.stream().filter(it -> it.getId().equals(otherUserID)).findFirst();
+                if(op.isPresent()){
+                    Log.d(TAG,"checkUserToRate method >>> ratingId is equal to otherUserID ");
+                    return false;
+                }
+               /* for(Rating rating:currUserRating)
                 {
                     if(rating.getId().equals(otherUserID))
                     {
                         Log.d(TAG,"checkUserToRate method >>> ratingId is equal to otherUserID ");
                         return false;
                     }
-                }
+                }*/
                 return true;
             }
             else
@@ -113,12 +111,18 @@ public class RequestHandler {
                 return false;
             }
             else{
-                for (Request currentNotifiacion: currUserRequests)
+                for (Request currentNotification: currUserRequests)
                 {
-                    if(currentNotifiacion.getRequestId().equals(otherUserID) &&
-                            currentNotifiacion.getTitle().equals(context.getString(R.string.request_accepted)))
+                    if(currentNotification.getRequestId().equals(otherUserID))
                     {
-                        return true;
+                        Log.d(TAG,"checkUserRequest method >>> requestExist "+otherUserID);
+                        Log.d(TAG,"checkUserRequest method >>> requestInfo "+currentNotification.toString());
+                       if (currentNotification.getTitle().contains("Accepted"))
+                        {
+                            Log.d(TAG,"checkUserRequest method >>> requestTitleCorrect "+otherUserID);
+                            return true;
+                    }
+
                     }
                 }
             }

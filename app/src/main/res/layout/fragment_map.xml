@@ -14,19 +14,22 @@
            android:id="@+id/map_fragment_goBack_imageView"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_marginStart="8dp"
-           android:layout_marginTop="10dp"
            android:src="@drawable/choose_gender_arrow_back"
            android:translationZ="10dp"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.0"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent" />
+           app:layout_constraintHorizontal_bias="0.03"
+           app:layout_constraintStart_toStartOf="@+id/map_fragment_mapView"
+           app:layout_constraintTop_toTopOf="@+id/map_fragment_mapView" />
 
        <com.google.android.gms.maps.MapView
            android:id="@+id/map_fragment_mapView"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
+           android:layout_marginStart="24dp"
+           android:layout_marginTop="24dp"
+           android:layout_marginEnd="24dp"
+           android:layout_marginBottom="24dp"
+           app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent" />
@@ -39,11 +42,10 @@
            android:layout_centerInParent="true"
            android:layout_centerHorizontal="false"
            android:background="@drawable/verify_phone_verify_button_rect"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/map_fragment_goBack_imageView"
-           app:layout_constraintVertical_bias="0.94">
+           app:layout_constraintBottom_toBottomOf="@+id/map_fragment_mapView"
+           app:layout_constraintEnd_toEndOf="@+id/map_fragment_mapView"
+           app:layout_constraintStart_toStartOf="@+id/map_fragment_mapView"
+           app:layout_constraintTop_toBottomOf="@+id/map_fragment_mapView">
 
            <TextView
                android:layout_width="wrap_content"

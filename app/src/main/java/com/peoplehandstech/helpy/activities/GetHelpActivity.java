@@ -44,6 +44,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peoplehandstech.helpy.UsersFetchingCallback;
 import com.peoplehandstech.helpy.utilites.DATABASE;
 import com.peoplehandstech.helpy.R;
 import com.peoplehandstech.helpy.utilites.RequestHandler;
@@ -62,6 +63,9 @@ import static com.peoplehandstech.helpy.notification.MyNotifications.CHANNEL_1_I
 public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static GetHelpActivity activity;
+
+
+    private float cameraInitialZoom=6.0f;
     private GoogleMap mMap;
     private FirebaseUser fUser;
     private Intent i;
@@ -216,20 +220,20 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
 
-    private final Runnable refreshData =new Runnable() {
-        @Override
-        public void run() {
-            if(DATABASE.isReadyToGo())
-            {
-                showData();
-                System.out.println(TAG+" refreshing the users");
-                DATABASE.setReadyToGo(false);
-                DATABASE.setUsers(currUser.getCity());
-                System.out.println(TAG+" setting the data ");
-                handler.postDelayed(refreshData,10000);
-            }
-        }
-    };
+//    private final Runnable refreshData =new Runnable() {
+//        @Override
+//        public void run() {
+//            if(DATABASE.isReadyToGo())
+//            {
+//                showData();
+//                System.out.println(TAG+" refreshing the users");
+//                DATABASE.setReadyToGo(false);
+//                DATABASE.setUsers(currUser.getCity());
+//                System.out.println(TAG+" setting the data ");
+////                handler.postDelayed(refreshData,10000);
+//            }
+//        }
+//    };
 
     @Override
     public void onBackPressed() {
@@ -347,6 +351,8 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
         }
         //clear map from markers
         mMap.clear();
+        allUsers=DATABASE.getUsers();
+        currUser=UserHandler.getCurrentUser();
         // add markers again in case there is new users
         for(User currentUser:allUsers)
         {
@@ -367,7 +373,7 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currUserLoc);
 
             mMap.moveCamera(cameraUpdate);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currUserLoc.latitude, currUserLoc.longitude), 12.0f));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currUserLoc.latitude, currUserLoc.longitude),cameraInitialZoom));
         }
 
     }
@@ -409,8 +415,9 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
         mMap.setMaxZoomPreference(20);
         showData();
         refreshNotifications();
-        refreshUsers();
-        DATABASE.setReadyToGo(false);
+
+//        refreshUsers(this.userCallback);
+
         //DATABASE.setUsers(currUser.getCity());
         //handler.postDelayed(refreshData,10000);
 
@@ -441,6 +448,12 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     protected void onResume() {
         super.onResume();
+        Toast.makeText(getApplicationContext(),"ONRESUME",Toast.LENGTH_SHORT).show();
+        if(UserHandler.isLocationChanged()){
+            cameraOnCurrUser=false;
+            this.showData();
+            UserHandler.setLocationChanged(false);
+        }
 //        handler.postDelayed(refreshData,3000);
     }
 
@@ -452,20 +465,10 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
-    private void refreshUsers (){
+    private void refreshUsers (UsersFetchingCallback userCallback){
 
         Log.d(TAG,"refreshUsers method >>> processing");
-        FirebaseDatabase.getInstance().getReference().child(currUser.getCity()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG,"refreshUsers method >>> onChildChanged");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        DATABASE.setUsers(UserHandler.getCurrentUser().getCity(),userCallback);
     }
 
     private void refreshNotifications () {
@@ -473,7 +476,7 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
 
         Log.d(TAG,"number of requests "+String.valueOf(currUser.getPending().size()));
         if(currUser.getPending().size()==0){
-            requestsImageView.setImageDrawable(getDrawable(R.drawable.empty_request));
+            requestsImageView.setImageDrawable(getDrawable(R.drawable.ic_baseline_notifications_24));
             pendingRequestsCircle.setVisibility(View.GONE);
         }
 
@@ -617,14 +620,14 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
         if(total>0)
         {
             Log.d(TAG,"this is the total of notifiactions and requests  from ShowPendingNotifications method "+total);
-            requestsImageView.setImageDrawable(getDrawable(R.drawable.request_mustard));
+            requestsImageView.setImageDrawable(getDrawable(R.drawable.ic_baseline_notifications_active_24));
             pendingRequestsCircle.setVisibility(View.VISIBLE);
             pendingRequestsNumber.setText(String.valueOf(total));
             if(!notified)
             {
                 notified=true;
                 Notification notification=new NotificationCompat.Builder(this,CHANNEL_1_ID)
-                        .setSmallIcon(R.drawable.empty_request).setContentText("You have a new Notification")
+                        .setSmallIcon(R.drawable.ic_baseline_notifications_24).setContentText("You have a new Notification")
                         .setContentTitle("Hi "+currUser.getName()).setPriority(NotificationCompat.PRIORITY_HIGH).setDefaults(NotificationCompat.DEFAULT_ALL)
                         .setCategory(NotificationCompat.CATEGORY_MESSAGE).build();
 
@@ -634,10 +637,30 @@ public class GetHelpActivity extends AppCompatActivity implements OnMapReadyCall
         }else
         {
             notified=false;
-            requestsImageView.setImageDrawable(getDrawable(R.drawable.empty_request));
+            requestsImageView.setImageDrawable(getDrawable(R.drawable.ic_baseline_notifications_24));
             pendingRequestsCircle.setVisibility(View.GONE);
         }
     }
 
+    private UsersFetchingCallback userCallback=new UsersFetchingCallback() {
+        @Override
+        public void onLocationReady(String country) {
 
+        }
+
+        @Override
+        public void onLocationNull() {
+
+        }
+
+        @Override
+        public void onLocationError() {
+
+        }
+
+        @Override
+        public void onUsersSet() {
+
+        }
+    };
 }

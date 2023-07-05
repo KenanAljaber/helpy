@@ -26,6 +26,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.peoplehandstech.helpy.UsersFetchingCallback;
 import com.peoplehandstech.helpy.activities.GetHelpActivity;
 import com.peoplehandstech.helpy.adapters.FriendsAdapter;
 import com.peoplehandstech.helpy.models.ChatRoom;
@@ -83,9 +84,6 @@ public class DATABASE {
      * @param userId the user id who want to use this mail
      * @return
      */
-
-
-
     public static boolean checkIfEmailExists(final String email, String userId) {
         for (User currUser : users) {
             if (currUser.geteMail().equals(email) && !currUser.getId().equals(userId)) {
@@ -188,7 +186,7 @@ public class DATABASE {
 
 
     //this code is temporal, once the database is updated should be deleted
-    private static void temporallySetUser (String id,Context context){
+     static void temporallySetUser (String id,Context context, UsersFetchingCallback userCallback){
         Toast.makeText(context,"This may take few minutes for the first time\n please wait..",Toast.LENGTH_LONG).show();
        FirebaseDatabase.getInstance().getReference().child("User").child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
            @Override
@@ -206,7 +204,7 @@ public class DATABASE {
                            user.setFriendsList(new ArrayList<Friend>());
                            user.setVerified(true);
                            Log.d(TAG,"temporallySetUser method >>> " +location);
-                           addUserToLocationNode(user);
+                           addUserToLocationNode(user,userCallback);
                        } catch (IOException e) {
                            e.printStackTrace();
                        }
@@ -222,7 +220,7 @@ public class DATABASE {
     }
 
     //this code is temporal, once the database is updated should be deleted
-    private static void addUserToLocationNode(User user){
+    private static void addUserToLocationNode(User user,UsersFetchingCallback userCallback){
         FirebaseDatabase.getInstance().getReference().child(user.getCity())
                 .child(user.getId())
                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -235,7 +233,7 @@ public class DATABASE {
                     public void onComplete(@NonNull Task<Void> task) {
                         deleteUserFromOldNode(user.getId());
                         UserHandler.setCurrentUser(user);
-                        setUsers(user.getCity());
+                        setUsers(user.getCity(),userCallback);
 
                     }
                 });
@@ -258,13 +256,13 @@ public class DATABASE {
      */
 
 
-    public static void setUsers(String cityName) {
+    public static void setUsers(String cityName,UsersFetchingCallback userCallback) {
 
         Log.d(TAG,"setUsers method >> setUsers(cityName) called");
 
-        databaseRef= FirebaseDatabase.getInstance().getReference().child(cityName);
+        DatabaseReference countryNode = FirebaseDatabase.getInstance().getReference().child(cityName);
 
-        databaseRef.addValueEventListener(new ValueEventListener() {
+        countryNode.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 users.clear();
@@ -281,6 +279,7 @@ public class DATABASE {
                         //add users to users arrayList
 
                         user=child.getValue(User.class);
+
                         //user=fillUserInfo(child);
                         if(user!=null &&user.getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                             UserHandler.setCurrentUser(user);
@@ -321,7 +320,8 @@ public class DATABASE {
                 }
                 if (users.size() > 0) {
                     GetHelpActivity.setAllUsers(users);
-                    getPhotosfromDatabase(count);
+                    getPhotosfromDatabase(count,userCallback);
+                    countryNode.removeEventListener(this);
                 }
             }
 
@@ -332,6 +332,7 @@ public class DATABASE {
             }
         });
     }
+
 
 
 
@@ -465,7 +466,7 @@ public class DATABASE {
 
     }
     public static void removeMessageListener (){
-        if(!messageFetcherRemoved){
+        if(!messageFetcherRemoved && messagesRef!=null ){
             messagesRef.removeEventListener(messagesFetcher);
             messageFetcherRemoved=true;
             Log.d(TAG,"removeMessageListener method >> child event listener has been removed");
@@ -477,7 +478,7 @@ public class DATABASE {
      * this method fetches all users photos from database
      * @param children the number of users in database so we make sure that number of photos has a match with number of users
      */
-    private static void getPhotosfromDatabase(final long children) {
+    private static void getPhotosfromDatabase(final long children, UsersFetchingCallback userCallback) {
         Log.d(TAG,"Getting photos from database storage");
         if (users != null) {
             for (final User user : users) {
@@ -491,6 +492,7 @@ public class DATABASE {
                                 System.out.println(TAG+" number of photos from database "+String.valueOf(photos.size()));
                                 getLastMessage(UserHandler.getCurrentUser());
                                 setReadyToGo(true);
+                                userCallback.onUsersSet();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -528,9 +530,10 @@ public class DATABASE {
     }
 
 
-    public static void getUserLocation(String userId, final Context context){
+    public static void getUserLocation(String userId, final Context context, UsersFetchingCallback userCallback){
         handler=new Handler(Looper.getMainLooper());
       DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users Locations").child(userId);
+      Log.d(TAG,"logging user id is "+userId );
       ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
           @Override
           public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -539,11 +542,13 @@ public class DATABASE {
                       Log.d(TAG,"getUserLocation method >>> this is the city idiot "+task.getResult().getValue().toString());
                       USER_LOCATION_READY=true;
                       currentUserCityName=task.getResult().getValue().toString();
-                     setUsers(currentUserCityName);
+                      userCallback.onLocationReady(currentUserCityName);
+//                     setUsers(currentUserCityName);
                   }else{
                       Log.d(TAG,task.getResult().toString());
                       USER_LOCATION_READY=true;
-                      temporallySetUser(userId,context);
+                      userCallback.onLocationNull();
+                      temporallySetUser(userId,context,userCallback);
                         Log.d(TAG,"getUserLocation method >>> location is null");
                   }
 

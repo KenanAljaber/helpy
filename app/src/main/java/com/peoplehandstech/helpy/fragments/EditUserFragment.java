@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.peoplehandstech.helpy.CustomSpinner;
 import com.peoplehandstech.helpy.R;
+import com.peoplehandstech.helpy.UserDataChangesCallback;
 import com.peoplehandstech.helpy.utilites.UserHandler;
 import com.peoplehandstech.helpy.activities.UserProfileActivity;
 import com.peoplehandstech.helpy.models.User;
@@ -35,7 +36,7 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EditUserFragment extends Fragment implements View.OnClickListener {
+public class EditUserFragment extends Fragment implements View.OnClickListener, UserDataChangesCallback {
 
     private Spinner spn;
     private View view;
@@ -176,20 +177,23 @@ public class EditUserFragment extends Fragment implements View.OnClickListener {
         if(id!=null)
         {
             //DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference().child("User");
-            currUser=new User(currUser.getGender(),currUser.getPhoto(),newName,currUser.getPhoneNumber(),currUser.geteMail(),newHelpMethod,currUser.getPassword(),currUser.getLatitude(),currUser.getLongitude());
-            currUser.setVerified(true);
-            currUser.setId(id);
+            currUser.setHowToHelp(newHelpMethod);
+            currUser.setName(newName);
             HashMap<String,Object>updates=new HashMap<>();
             updates.put("name",newName);
             updates.put("howToHelp",newHelpMethod);
-            UserHandler.updateUserInfo(updates,currUser);
-            Toast.makeText(getContext(),getString(R.string.changes_has_been_saved),Toast.LENGTH_SHORT).show();
-            nameEditText.setText("");
-            changed=true;
-            UserHandler.setCurrentUser(currUser);
-            UserProfileActivity.updateUser();
-            goToSettings();
+            UserHandler.updateUserInfo(updates,currUser,this::onChangesCompleted);
+
         }
     }
 
+    @Override
+    public void onChangesCompleted() {
+        Toast.makeText(getContext(),getString(R.string.changes_has_been_saved),Toast.LENGTH_SHORT).show();
+        nameEditText.setText("");
+        changed=true;
+        UserHandler.setCurrentUser(currUser);
+        UserProfileActivity.updateUser();
+        goToSettings();
+    }
 }

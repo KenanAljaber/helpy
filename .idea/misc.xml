@@ -1,9 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/activity_chat.xml" value="0.14324324324324325" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.13648648648648648" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/drawable/ic_baseline_notifications_active_24.xml" value="0.12162162162162163" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/drawable/ic_friends.xml" value="0.13648648648648648" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/activity_chat.xml" value="0.12" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/activity_get_help.xml" value="0.14" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/activity_other_user_profile.xml" value="0.11114864864864865" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/activity_set_location.xml" value="0.17702702702702702" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/activity_user_profile.xml" value="0.12" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/fragment_fragment_main_other_profile.xml" value="0.11114864864864865" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/fragment_map.xml" value="0.13" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/fragment_test.xml" value="0.17702702702702702" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/reciever_message_layout_.xml" value="0.11114864864864865" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/sender_message_layout_.xml" value="0.11114864864864865" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/settings_fragment.xml" value="0.17702702702702702" />
+        <entry key="..\:/Users/Keno1/Documents/Android projects/LocationTest/app/src/main/res/layout/test.xml" value="0.17702702702702702" />
       </map>
     </option>
   </component>

@@ -57,21 +57,23 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
     @Override
     public void onBindViewHolder(@NonNull FriendsViewHolder holder, int position) {
         User user=friends.get(position);
+        Log.d(TAG,"Friends list =>" + friends.toString());
         Log.d(TAG,String.valueOf(getItemCount()));
 
-        if(DATABASE.getLastMessageMap().get(user.getId())!=null){
+        if(user !=null && DATABASE.getLastMessageMap().get(user.getId())!=null){
             Message message= DATABASE.getLastMessageMap().get(user.getId());
             holder.lastMessage.setText(message.getMessageBody());
             holder.lastMessageTime.setText(message.getDate());
             Log.d(TAG,"onBindViewHolder method >>> message body is "+message.getMessageBody());
+        Log.d(TAG,"OnBindViewHolder method >>> "+user.getName());
+        holder.friendsName.setText(user.getName());
+        Glide.with(holder.itemView.getContext()).load(GetHelpActivity.usersPhotos.get(user.getId())).into(holder.friendImageView);
 
         }else{
             holder.lastMessage.setText("Message");
         }
 
 
-        Log.d(TAG,"OnBindViewHolder method >>> "+user.getName());
-        holder.friendsName.setText(user.getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +99,6 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
 
             }
         });
-        Glide.with(holder.itemView.getContext()).load(GetHelpActivity.usersPhotos.get(user.getId())).into(holder.friendImageView);
     }
 
     @Override

@@ -88,6 +88,7 @@
     <string name="how_to_help">how to help you</string>
     <string name="request_has_been_sent">Request has been sent to</string>
     <string name="request_accepted">Request Accepted</string>
+    <string name="you_accepted">YOU_ACCEPTED</string>
     <string name="has_accepted_your_request_you_can_contact_him_directly_via_whatsapp">has accepted your request ,you can find him/her in your friend list.</string>
     <string name="request_denied">Request denied</string>
     <string name="you_are_a_friend_now_with">you are a friend now with </string>

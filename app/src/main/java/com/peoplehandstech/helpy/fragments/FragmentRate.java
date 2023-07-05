@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.peoplehandstech.helpy.notification.MyNotifications;
-import com.peoplehandstech.helpy.utilites.DATABASE;
 import com.peoplehandstech.helpy.models.NotificationFCM;
 import com.peoplehandstech.helpy.activities.OtherUserProfileActivity;
 import com.peoplehandstech.helpy.R;
@@ -56,7 +55,7 @@ public class FragmentRate extends Fragment implements View.OnClickListener {
         if(getActivity().getIntent().getSerializableExtra("marker user")!=null)
         {
             markerUser =(User)getActivity().getIntent().getSerializableExtra("marker user");
-            currUser= DATABASE.getUser(DATABASE.getFUser().getUid());
+            currUser= UserHandler.getChatUser();
         }
         thumbsUp.setOnClickListener(this);
         thumbsDown.setOnClickListener(this);
@@ -96,7 +95,7 @@ public class FragmentRate extends Fragment implements View.OnClickListener {
                @Override
                public void onSuccess(Void aVoid) {
                    Toast.makeText(getActivity(),"Successfully rated!",Toast.LENGTH_SHORT).show();
-                   UserHandler.updateUserInfo("reputation",newReputation,markerUser);
+                   UserHandler.updateUserInfoByAttribute("reputation",newReputation,markerUser,()->{
 
                    NotificationFCM notificationFCM=new NotificationFCM(markerUser.getName(),"You have a new review!","Someone",markerUser.getToken());
                    try {
@@ -105,6 +104,8 @@ public class FragmentRate extends Fragment implements View.OnClickListener {
                    } catch (FileNotFoundException e) {
                        e.printStackTrace();
                    }
+                   });
+
 
                }
            });

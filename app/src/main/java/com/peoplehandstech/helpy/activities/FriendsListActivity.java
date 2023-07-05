@@ -81,17 +81,17 @@ public class FriendsListActivity extends AppCompatActivity {
        friendsListListener=new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                UserHandler.refreshUserFriendsList(UserHandler.getCurrentUser());
+                UserHandler.refreshUserFriendsList(UserHandler.getCurrentUser(),()-> refreshAdapterList());
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                UserHandler.refreshUserFriendsList(UserHandler.getCurrentUser());
+                UserHandler.refreshUserFriendsList(UserHandler.getCurrentUser(),()-> refreshAdapterList());
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                UserHandler.refreshUserFriendsList(UserHandler.getCurrentUser());
+                UserHandler.refreshUserFriendsList(UserHandler.getCurrentUser(),()-> refreshAdapterList());
             }
 
             @Override
@@ -108,8 +108,11 @@ public class FriendsListActivity extends AppCompatActivity {
         friendsListRef.addChildEventListener(friendsListListener);
 
     }
-
-
+    private void refreshAdapterList(){
+        this.friends= getFriendsIdsToUsers(UserHandler.getCurrentUser());
+        this.adapter.setItems(friends);
+        this.adapter.notifyDataSetChanged();
+    }
     public static FriendsListActivity instance (){
         return activity;
     }

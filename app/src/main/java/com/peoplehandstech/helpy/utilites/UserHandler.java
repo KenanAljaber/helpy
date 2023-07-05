@@ -10,16 +10,20 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.peoplehandstech.helpy.RefreshCallback;
+import com.peoplehandstech.helpy.UserDataChangesCallback;
+import com.peoplehandstech.helpy.UsersFetchingCallback;
 import com.peoplehandstech.helpy.activities.UserProfileActivity;
 import com.peoplehandstech.helpy.models.Friend;
 import com.peoplehandstech.helpy.models.User;
@@ -34,6 +38,16 @@ public class UserHandler  {
      private static User CURRENT_USER;
      private static  User CHAT_USER;
      private static String TAG="USER_HANDLER";
+
+    public static boolean isLocationChanged() {
+        return locationChanged;
+    }
+
+    public static void setLocationChanged(boolean locationChanged) {
+        UserHandler.locationChanged = locationChanged;
+    }
+
+    private static boolean locationChanged=false;
     /**
      * {@link #CURRENT_USER}, is the user who is signed in
      */
@@ -102,17 +116,103 @@ public class UserHandler  {
     }
 
 
-    public static void updateUserInfo (String infoName, Object value,User wantedUser)
+    public static void updateUserInfoByAttribute(String attributeName, Object value, User wantedUser, UserDataChangesCallback onUserDataChanged)
     {
+        Log.d(TAG,"Updating user " + attributeName + " attribute");
         HashMap<String,Object> updates =new HashMap<>();
-        updates.put(infoName,value);
+        updates.put(attributeName,value);
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child(wantedUser.getCity()).child(wantedUser.getId());
-        reference.updateChildren(updates);
+        reference.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Log.d(TAG,"Updated successfully");
+                onUserDataChanged.onChangesCompleted();
+            }
+        });
     }
-    public static void updateUserInfo (HashMap<String,Object> updates,User wantedUser)
+    public static void updateUserInfo(HashMap<String,Object> updates, User wantedUser, UserDataChangesCallback onUserDataChanged)
     {
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child(wantedUser.getCity()).child(wantedUser.getId());
-        reference.updateChildren(updates);
+        Log.d(TAG,"Updating user "+ updates.size() +" attributes");
+        DatabaseReference userRef= FirebaseDatabase.getInstance().getReference().child(wantedUser.getCity()).child(wantedUser.getId());
+        userRef.updateChildren(updates);
+        Log.d(TAG,"children updated");
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                User currentUser=snapshot.getValue(User.class);
+                setCurrentUser(currentUser);
+            if(updates.get("city")!=null && !wantedUser.getCity().equals(updates.get("city"))){
+                    Log.d(TAG,"Location updated, moving user to a new node");
+                  moveUserToNewLocatoin(wantedUser.getCity(),(String)updates.get("city"),wantedUser.getId(),onUserDataChanged);
+             }else{
+                Log.d(TAG,"Location was not updated, and process has finished!");
+                onUserDataChanged.onChangesCompleted();
+            }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private static void moveUserToNewLocatoin(String oldCountry, String newCountry, String userId,UserDataChangesCallback onUserDataChanged) {
+    Log.d(TAG,"Moving user to a new location "+newCountry);
+        // Change the location of the user in the user locatoins node (the dictionary)
+       FirebaseDatabase.getInstance().getReference().child("Users Locations").child(userId).setValue(newCountry);
+        // Get references to the old and new locations
+        DatabaseReference oldRef = FirebaseDatabase.getInstance().getReference().child(oldCountry).child(userId);
+        DatabaseReference newRef = FirebaseDatabase.getInstance().getReference().child(newCountry).child(userId);
+
+        // Read the data from the old location
+
+        oldRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Retrieve the data from the old location
+                    Object data = dataSnapshot.getValue();
+
+                    // Remove the data from the old location
+                    oldRef.removeValue();
+
+                    // Write the data to the new location
+                    newRef.setValue(data);
+
+                    DATABASE.setUsers(newCountry, new UsersFetchingCallback() {
+                        @Override
+                        public void onLocationReady(String country) {
+
+                        }
+
+                        @Override
+                        public void onLocationNull() {
+
+                        }
+
+                        @Override
+                        public void onLocationError() {
+
+                        }
+
+                        @Override
+                        public void onUsersSet() {
+                            setLocationChanged(true);
+                            onUserDataChanged.onChangesCompleted();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle any errors that may occur
+            }
+        });
     }
 
 
@@ -145,7 +245,7 @@ public class UserHandler  {
         MARKER_USER = markerUser;
     }
 
-    public static void refreshUserFriendsList(User user){
+    public static void refreshUserFriendsList(User user, RefreshCallback refreshCallback){
         FirebaseDatabase.getInstance().getReference().child(user.getCity()).child(user.getId()).child("Friends").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -156,6 +256,7 @@ public class UserHandler  {
                 }
                 user.setFriendsList(friends);
                 UserHandler.setCurrentUser(user);
+                refreshCallback.onFirendsListRefreshComlete();
             }
 
             @Override
@@ -175,6 +276,28 @@ public class UserHandler  {
         }
         return filteredUsers;
     }
+
+    private static UsersFetchingCallback usersCallback=new UsersFetchingCallback() {
+        @Override
+        public void onLocationReady(String country) {
+
+        }
+
+        @Override
+        public void onLocationNull() {
+
+        }
+
+        @Override
+        public void onLocationError() {
+
+        }
+
+        @Override
+        public void onUsersSet() {
+//            setLocationChanged(true);
+        }
+    };
 
 
 }

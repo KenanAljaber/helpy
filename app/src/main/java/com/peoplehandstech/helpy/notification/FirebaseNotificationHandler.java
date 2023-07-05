@@ -58,11 +58,8 @@ public class FirebaseNotificationHandler {
 
 
 
-   public static JSONObject createJSONObject(NotificationFCM notificationFCM, User currentUser, User targetUser,String additionalMessage,String type) throws FileNotFoundException {
-
-
-
-
+   public static JSONObject createJSONObject(NotificationFCM notificationFCM, User currentUser,
+                                             User targetUser,String additionalMessage,String type) throws FileNotFoundException {
 
         String TOPIC = "/tokens/"  + targetUser.getToken(); //topic must match with what the receiver subscribed to
         String NOTIFICATION_MESSAGE = notificationFCM.getMessage();

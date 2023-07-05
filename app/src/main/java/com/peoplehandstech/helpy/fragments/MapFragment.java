@@ -7,9 +7,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ import com.peoplehandstech.helpy.R;
 import com.peoplehandstech.helpy.utilites.UserHandler;
 import com.peoplehandstech.helpy.models.User;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -35,7 +38,10 @@ import java.util.HashMap;
 public class MapFragment extends Fragment implements  OnMapReadyCallback , View.OnClickListener{
     private MapView mMapView;
     private GoogleMap mMap;
+
+    private float cameraInitialZoom=6.0f;
     private Location selectedLocation;
+    private String selectedCity;
     private RelativeLayout setLocationRL;
     private ImageView goBack;
 
@@ -68,9 +74,9 @@ public class MapFragment extends Fragment implements  OnMapReadyCallback , View.
             e.printStackTrace();
         }
 
-        
-        
-        
+
+
+
         mMapView.getMapAsync(this);
 
 
@@ -82,19 +88,24 @@ public class MapFragment extends Fragment implements  OnMapReadyCallback , View.
         if (view.getId()==setLocationRL.getId())
         {
             User currUser= UserHandler.getCurrentUser();
-            if(selectedLocation!=null)
+            if(selectedLocation!=null && selectedCity!=null && selectedCity.trim().length()>0)
             {
+                getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 currUser.setLocation(new com.peoplehandstech.helpy.models.Location(selectedLocation.getLatitude(),selectedLocation.getLongitude()));
                 currUser.setLatitude(selectedLocation.getLatitude());
                 currUser.setLongitude(selectedLocation.getLongitude());
-                UserHandler.setCurrentUser(currUser);
                 HashMap<String,Object>updates=new HashMap<>();
                 updates.put("longitude",selectedLocation.getLongitude());
                 updates.put("latitude",selectedLocation.getLatitude());
-                UserHandler.updateUserInfo(updates,currUser);
-//                DATABASE.updateUser(currUser.getId(),currUser);
+                updates.put("city",selectedCity);
+//                UserHandler.setCurrentUser(currUser);
+                UserHandler.updateUserInfo(updates,currUser,()->{
+                  getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 Toast.makeText(getContext(),getString(R.string.changes_has_been_saved),Toast.LENGTH_SHORT).show();
                 getFragmentManager().popBackStackImmediate();
+                    Log.d("MAP_FRAGMENT","onUserLocationUpdatedComplete");
+                });
             }else{
                 Toast.makeText(getContext(),getString(R.string.please_set_location),Toast.LENGTH_SHORT).show();
             }
@@ -142,7 +153,7 @@ public class MapFragment extends Fragment implements  OnMapReadyCallback , View.
         mMap.addMarker(new MarkerOptions().position(sydney).title(UserHandler.getCurrentUser().getName()).snippet(getString(R.string.location)));
 
         // For zooming automatically to the location of the marker
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(cameraInitialZoom).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -156,8 +167,16 @@ public class MapFragment extends Fragment implements  OnMapReadyCallback , View.
                 // initialize the latitude and longitude of location to the selected location of the user
                 selectedLocation.setLatitude(latLng.latitude);
                 selectedLocation.setLongitude(latLng.longitude);
+                try{
+                selectedCity= com.peoplehandstech.helpy.models.Location.getCityName(latLng.longitude, latLng.latitude, getContext());
                 // here we add the marker where the user has clicked
                 mMap.addMarker(new MarkerOptions().position(latLng).title(UserHandler.getCurrentUser().getName()));
+                }catch(Exception exception){
+                    Log.e("MapFragment","could not get the city name "+exception.toString());
+                    Toast.makeText(getContext(),"Please select a valid location",Toast.LENGTH_SHORT).show();
+                    selectedLocation=null;
+                    selectedCity="";
+                }
             }
         });
     }

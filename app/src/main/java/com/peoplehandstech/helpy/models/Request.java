@@ -72,4 +72,16 @@ public class Request implements Serializable, Notification {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "requestId='" + requestId + '\'' +
+                ", message='" + message + '\'' +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", accepted=" + accepted +
+                ", seen=" + seen +
+                '}';
+    }
 }

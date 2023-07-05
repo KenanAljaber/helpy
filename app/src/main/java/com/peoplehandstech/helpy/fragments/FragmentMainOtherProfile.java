@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.peoplehandstech.helpy.notification.MyNotifications;
-import com.peoplehandstech.helpy.utilites.DATABASE;
 import com.peoplehandstech.helpy.models.NotificationFCM;
 import com.peoplehandstech.helpy.R;
 import com.peoplehandstech.helpy.utilites.RequestHandler;
@@ -62,7 +61,7 @@ public class FragmentMainOtherProfile extends Fragment implements View.OnClickLi
         sendRequestRL = v.findViewById(R.id.fragment_other_main_sendRequestButtonRL);
         messageTextRL.setOnClickListener(this);
         sendRequestRL.setOnClickListener(this);
-        currentUser = DATABASE.getUser(DATABASE.getFUser().getUid());
+        currentUser = UserHandler.getCurrentUser();
         markerUserRequest = new ArrayList<>();
         if (getActivity().getIntent().getSerializableExtra("marker user") != null) {
             markerUser = (User) getActivity().getIntent().getSerializableExtra("marker user");
@@ -112,7 +111,7 @@ public class FragmentMainOtherProfile extends Fragment implements View.OnClickLi
                     int askedForHelp = currentUser.getAskedForHelp() + 1;
                     currentUser.setAskedForHelp(askedForHelp);
                     UserHandler.setCurrentUser(currentUser);
-                    UserHandler.updateUserInfo("askedForHelp", askedForHelp, currentUser);
+                    UserHandler.updateUserInfoByAttribute("askedForHelp", askedForHelp, currentUser,()->{
                     messageTextEditTExt.setText("");
                     clicked = false;
 
@@ -125,6 +124,7 @@ public class FragmentMainOtherProfile extends Fragment implements View.OnClickLi
                         e.printStackTrace();
                     }
                     FirebaseNotificationHandler.sendNotification(notification,getContext());
+                    });
 
 
                 } else {

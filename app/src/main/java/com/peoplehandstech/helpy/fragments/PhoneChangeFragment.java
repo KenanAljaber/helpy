@@ -192,11 +192,13 @@ public class PhoneChangeFragment extends Fragment implements View.OnClickListene
                 Toast.makeText(getContext(),getString(R.string.changes_has_been_saved),Toast.LENGTH_SHORT).show();
                 currUser.setPhoneNumber(newPhoneNumber);
 //                DATABASE.updateUser(currUser.getId(),currUser);
-                UserHandler.updateUserInfo("phoneNumber",newPhoneNumber,currUser);
-                UserHandler.setCurrentUser(currUser);
-                UserProfileActivity.updateUser();
-                getFragmentManager().popBackStackImmediate();
-                progressBar.setVisibility(View.GONE);
+                UserHandler.updateUserInfoByAttribute("phoneNumber",newPhoneNumber,currUser,()->{
+                    UserHandler.setCurrentUser(currUser);
+                    UserProfileActivity.updateUser();
+                    getFragmentManager().popBackStackImmediate();
+                    progressBar.setVisibility(View.GONE);
+                });
+
 
             }
         }).addOnFailureListener(new OnFailureListener() {

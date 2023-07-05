@@ -1,5 +1,5 @@
 package com.peoplehandstech.helpy.models;
-
+//notification firebase cloud messaging
 public class NotificationFCM {
 
     private String to,message,from;

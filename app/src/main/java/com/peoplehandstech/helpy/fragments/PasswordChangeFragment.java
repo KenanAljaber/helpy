@@ -85,7 +85,6 @@ public class PasswordChangeFragment extends Fragment implements View.OnClickList
                     changingPassword.setVisibility(View.VISIBLE);
 
                     getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    FirebaseUser fUser= DATABASE.getFUser();
 
                     AuthCredential credential= EmailAuthProvider.getCredential(currUser.geteMail(),oldPassword.getText().toString());
 

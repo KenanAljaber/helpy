@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -11,7 +13,7 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:background="@color/mustard"
         android:orientation="horizontal"
         android:padding="8dp"
@@ -57,8 +59,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_profile_circleImage"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/user_profile_photo_circle"
                 android:translationZ="-10dp" />
         </RelativeLayout>
@@ -82,13 +84,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/dubai_medium"
                 android:text="+593987461743"
                 android:textAlignment="center"
                 android:textColor="@color/brown"
-                android:textSize="13sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_profile_helpTextView" />
 
@@ -97,13 +99,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/dubai_medium"
                 android:text="Hosting a person for a limited time"
                 android:textAlignment="center"
                 android:textColor="@color/brown"
-                android:textSize="13sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_profile_proName" />
 
@@ -112,12 +114,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/dubai_bold"
                 android:text="@string/name"
                 android:textAlignment="center"
-                android:textColor="@color/brown"
+                android:textColor="@color/almostBlack"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -126,16 +127,31 @@
 
     </LinearLayout>
 
+
+<RelativeLayout
+    android:id="@+id/support_line"
+    app:layout_constraintTop_toBottomOf="@id/linearLayout3"
+    app:layout_constraintLeft_toLeftOf="@id/root"
+    app:layout_constraintRight_toRightOf="@id/root"
+    android:layout_width="match_parent"
+    android:layout_marginTop="70dp"
+    android:layout_height="0dp"
+    android:visibility="invisible"/>
+
+
+
     <LinearLayout
         android:id="@+id/linearLayout4"
+        app:layout_constraintStart_toStartOf="@id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="@id/linearLayout3"
+        app:layout_constraintBottom_toTopOf="@id/support_line"
+        android:layout_marginTop="1000dp"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/user_profile_card_view_style"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        tools:layout_editor_absoluteY="100dp">
 
         <RelativeLayout
 
@@ -233,11 +249,20 @@
     <FrameLayout
         android:id="@+id/frameContainer"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout4">
+
+        <!-- Content of your FrameLayout -->
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"></FrameLayout>
-
-
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
 
 
